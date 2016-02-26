@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <title>Lagerlisten</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="site.css"></link>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-9">
+                <h1>Lagerlisten</h1>
+                <button id="sendData">Send</button>
+                <button id="loadData">Load data</button>
+                <span id="loading" class="glyphicon spinning glyphicon-refresh"></span>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group has-feedback">
+                    <input id="search" class="form-control" type="text" placeholder="Søg" />
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="nav nav-tabs" id="tabs">
+                    <li class="active"><a href="#resistors" data-toggle="tab">Modstande</a></li>
+                    <li><a href="#capacitors" data-toggle="tab">Kondensatore</a></li>
+                    <li><a href="#ics" data-toggle="tab">ICer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="tab-content" id="results">
+                    <div class="tab-pane active" id="resistors">
+                        <h1 class="tab-header">Modstande</h1>
+                        <table class="table table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Værdi</th>
+                                    <th>Tolerance</th>
+                                    <th>Billede</th>
+                                </tr>
+                                <tr class="filter-row">
+                                    <th>
+                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kulfilm</td>
+                                    <td>2 k</td>
+                                    <td>1%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Kulfilm</td>
+                                    <td>3 k</td>
+                                    <td>1%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Kulfilm</td>
+                                    <td>4 k</td>
+                                    <td>1%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Kulfilm</td>
+                                    <td>5 k</td>
+                                    <td>1%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="capacitors">
+                        <h1 class="tab-header">Kondensatore</h1>
+                        <table class="table table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Værdi</th>
+                                    <th>Tolerance</th>
+                                    <th>Billede</th>
+                                </tr>
+                                <tr class="filter-row">
+                                    <th>
+                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tantal</td>
+                                    <td>100 n</td>
+                                    <td>5%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Film</td>
+                                    <td>180 n</td>
+                                    <td>5%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Elyt</td>
+                                    <td>1000 u</td>
+                                    <td>20%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Elyt</td>
+                                    <td>100 u</td>
+                                    <td>20%</td>
+                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="ics">
+                        <h1 class="tab-header">ICer</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "au-intercationdesign-team-1-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "author": "Crevil <https://www.github.com/Crevil>",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.13.4",
+    "reload": "^0.7.0"
+  }
+}
