@@ -1,21 +1,23 @@
+/* global $ */
+"use strict";
+
 $(function () {
     const apiUrl = "http://prototypehold1.azurewebsites.net/api/ComponentLists/";
     const name = "stdList";
     const highlightClass = "success";
-    var loading;
     var components = [];
+    const timeout = 1500;
 
     init();
 
     function init() {
-        loading = $("#loading").hide();
-
         setTooltips();
         setTables();
-        setDataSync();
         setGlobalSearch();
         setNav();
         setList();
+
+        setDataSync();
     }
 
     function setNav() {
@@ -40,8 +42,11 @@ $(function () {
     function setTables() {
         var dataTableOptions = {
             paging: false,
-            ordering: false,
+            ordering: true,
             info: false,
+            columnDefs: [
+                { targets: -1, orderable: false }
+            ]
         };
     
         // DataTable
@@ -65,7 +70,6 @@ $(function () {
                         }
                     });
             });
-
         }
     }
 
@@ -73,23 +77,59 @@ $(function () {
         $("tbody tr").click(function (e) {
             var self = $(this);
 
-            var component = e.currentTarget.innerText;
+            var r = $(e.currentTarget).children();
+            var clickedRow = $(e.currentTarget);
+
+            var s = getDtoName(r);
 
             if (self.hasClass(highlightClass)) {
-                self.removeClass(highlightClass);
 
                 for (var index = 0; index < components.length; index++) {
-                    var element = components[index];
-                    if (element.Name === component) {
-                        components.pop(element);
+                    var component = components[index];
+                                        
+                    if (component.Name === s) {
+                        self.removeClass(highlightClass);
+                        components.pop(component);
                         break;
                     }
                 }
             } else {
                 self.addClass(highlightClass)
-                components.push({ Name: component });
+                components.push({ Name: s });
             }
+
+            postList();
         });
+    }
+
+    function getDtoName(row) {
+        var s = "";
+        for (var rI = 0; rI < row.length - 1; rI++) {
+            var td = row[rI];
+            s += td.innerText + ";";
+        }
+        return s;
+    }
+
+    function setHightlighting() {
+        var rows = $("tr");
+
+        for (var index = 0; index < rows.length; index++) {
+            var row = $(rows[index])[0];
+
+            for (var compIndex = 0; compIndex < components.length; compIndex++) {
+                var component = components[compIndex];
+
+                if (getDtoName($(row).children()) === component.Name) {
+                    $(row).addClass("success");
+                    break;
+                }
+            }
+        }
+    }
+
+    function clearHighlighting() {
+        $("table tr.success").removeClass("success");
     }
 
     function setGlobalSearch() {
@@ -108,46 +148,19 @@ $(function () {
      * 
      **/
     function setDataSync() {
-        // set interval
-        // var timer = setInterval(syncData, 2000);
-        $("#sendData").click(syncData);
+        syncData();
+
+        setInterval(syncData, timeout);
 
         function syncData() {
-            loading.show();
-
-            //getLatest();
-
-            deleteOldList();
-
-            postData();
+            getLatest(function () {
+                setHightlighting();
+            });
         }
+    }
 
-        // $("#loadData").click(getLatest);
-        //         function getLatest() {
-        //             if (latestId) {
-        //                 $.ajax({
-        //                     url: apiUrl,
-        //                     type: 'GET',
-        //                     success: function (data) {
-        //                         var lastIndex = data.length - 1;
-        // 
-        //                         console.log(data[lastIndex]);
-        // 
-        //                         if (data[lastIndex].Id !== latestId) {
-        //                             clearComponents();
-        //                         }
-        //                     }
-        //                 });
-        //             }
-        //         }
-        
-        function clearComponents() {
-            components = [];
-
-            $("table tr .active").removeClass("active");
-        }
-
-        function postData() {
+    function postList() {
+        deleteAll(function () {
             var dto = {
                 Name: name,
                 Components: components
@@ -158,25 +171,57 @@ $(function () {
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(dto),
-                dataType: 'json',
-                success: postDone
+                dataType: 'json'
             });
-        }
+        });
+    }
 
-        var latestId;
+    function getLatest(callback) {
+        getAll(function (data) {
+            components = [];
+            if (data.length !== 0) {
+                var lastIndex = data.length - 1;
+                var list = data[lastIndex];
 
-        function deleteOldList() {
-            if (latestId) {
-                $.ajax({
-                    url: apiUrl + latestId,
-                    type: 'DELETE'
-                });
+                for (var index = 0; index < list.Components.length; index++) {
+                    var component = list.Components[index];
+                    components.push({ Name: component.Name });
+                }
+            } else {
+                clearHighlighting();
             }
-        }
 
-        function postDone(data) {
-            latestId = data.Id;
-            loading.hide();
-        }
+            if (typeof callback === "function") {
+                callback();
+            }
+        });
+    }
+
+    function getAll(callback) {
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    function deleteAll(callback) {
+        getAll(function (data) {
+            for (var index = 0; index < data.length; index++) {
+                var list = data[index];
+                deleteList(list.Id);
+            }
+        });
+        callback();
+    }
+
+    function deleteList(id, callback) {
+        $.ajax({
+            url: apiUrl + id,
+            type: "DELETE",
+            success: callback
+        });
     }
 });

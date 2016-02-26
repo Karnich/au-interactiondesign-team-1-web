@@ -8,21 +8,19 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-9">
+    <div class="container-fluid">
+        <div class="row color-main">
+            <div class="col-xs-6">
                 <h1>Lagerlisten</h1>
-                <button id="sendData">Send</button>
-                <button id="loadData">Load data</button>
-                <span id="loading" class="glyphicon spinning glyphicon-refresh"></span>
             </div>
-            <div class="col-xs-3">
-                <div class="form-group has-feedback">
+            <div class="col-xs-6">
+                <div id="searchInput" class="form-group has-feedback">
                     <input id="search" class="form-control" type="text" placeholder="Søg" />
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-tabs" id="tabs">
@@ -32,9 +30,11 @@
                 </ul>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="tab-content" id="results">
+                    <h1 class="tab-header bg-danger">Søgning er ikke implementeret</h1>
                     <div class="tab-pane active" id="resistors">
                         <h1 class="tab-header">Modstande</h1>
                         <table class="table table-hover" width="100%">
@@ -43,20 +43,30 @@
                                     <th>Type</th>
                                     <th>Værdi</th>
                                     <th>Tolerance</th>
-                                    <th>Billede</th>
+                                    <th></th>
+                                    <th width="10%"></th>
                                 </tr>
                                 <tr class="filter-row">
                                     <th>
-                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </th>
-                                    <th>
-                                    </th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,25 +74,29 @@
                                     <td>Kulfilm</td>
                                     <td>2 k</td>
                                     <td>1%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                    <td>C5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="resistor"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                                 <tr>
                                     <td>Kulfilm</td>
                                     <td>3 k</td>
                                     <td>1%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                    <td>H2</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="resistor"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                                 <tr>
                                     <td>Kulfilm</td>
                                     <td>4 k</td>
                                     <td>1%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                    <td>H4</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="resistor"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                                 <tr>
                                     <td>Kulfilm</td>
                                     <td>5 k</td>
                                     <td>1%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="resistor"></span></td>
+                                    <td>H5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="resistor"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -95,20 +109,30 @@
                                     <th>Type</th>
                                     <th>Værdi</th>
                                     <th>Tolerance</th>
-                                    <th>Billede</th>
+                                    <th></th>
+                                    <th width="10%"></th>
                                 </tr>
                                 <tr class="filter-row">
                                     <th>
-                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="Filtrer" class="form-control" />
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
                                     </th>
-                                    <th>
-                                    </th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,31 +140,98 @@
                                     <td>Tantal</td>
                                     <td>100 n</td>
                                     <td>5%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                    <td>A5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="cap"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                                 <tr>
                                     <td>Film</td>
                                     <td>180 n</td>
                                     <td>5%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                    <td>C5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="cap"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                                 <tr>
                                     <td>Elyt</td>
                                     <td>1000 u</td>
                                     <td>20%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                    <td>G5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="cap"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                                 <tr>
                                     <td>Elyt</td>
                                     <td>100 u</td>
                                     <td>20%</td>
-                                    <td><span class="glyphicon glyphicon-picture" data-type="cap"></span></td>
+                                    <td>C5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="cap"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-pane" id="ics">
                         <h1 class="tab-header">ICer</h1>
+                        <table class="table table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Navn</th>
+                                    <th>Type</th>
+                                    <th>Beskrivelse</th>
+                                    <th></th>
+                                    <th width="10%"></th>
+                                </tr>
+                                <tr class="filter-row">
+                                    <th>
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="form-group has-feedback">
+                                            <input type="text" placeholder="Filtrer" class="form-control" />
+                                            <span class="text-muted glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>LM555</td>
+                                    <td>Timer</td>
+                                    <td>Det er god til alt</td>
+                                    <td>C5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="ic"></span> <a href="datasheet.pdf" target="_blank"><a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></a></p></td>
+                                </tr>
+                                <tr>
+                                    <td>74HC00</td>
+                                    <td>CMOS</td>
+                                    <td>Quad 2-inp NAND</td>
+                                    <td>D6</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="ic"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
+                                </tr>
+                                <tr>
+                                    <td>74HC02</td>
+                                    <td>CMOS</td>
+                                    <td>Quad 2-inp NOR</td>
+                                    <td>D2</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="ic"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
+                                </tr>
+                                <tr>
+                                    <td>LM324</td>
+                                    <td>Op-amp</td>
+                                    <td>Quad, low power</td>
+                                    <td>D5</td>
+                                    <td><p><span class="glyphicon glyphicon-large glyphicon-picture" data-type="ic"></span> <a href="datasheet.pdf" target="_blank"><span class="glyphicon glyphicon-large glyphicon-duplicate"></span></a></p></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
