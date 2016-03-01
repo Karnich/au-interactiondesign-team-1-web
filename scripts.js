@@ -2,11 +2,11 @@
 "use strict";
 
 $(function () {
-    const apiUrl = "http://prototypehold1.azurewebsites.net/api/ComponentLists/";
-    const name = "stdList";
-    const highlightClass = "success";
+    var apiUrl = "http://prototypehold1.azurewebsites.net/api/ComponentLists/";
+    var name = "stdList";
+    var highlightClass = "success";
     var components = [];
-    const timeout = 1500;
+    var timeout = 1500;
 
     init();
 
@@ -48,7 +48,7 @@ $(function () {
                 { targets: -1, orderable: false }
             ]
         };
-    
+
         // DataTable
         var tables = $(".table");
         for (var index = 0; index < tables.length; index++) {
@@ -78,7 +78,6 @@ $(function () {
             var self = $(this);
 
             var r = $(e.currentTarget).children();
-            var clickedRow = $(e.currentTarget);
 
             var s = getDtoName(r);
 
@@ -86,7 +85,7 @@ $(function () {
 
                 for (var index = 0; index < components.length; index++) {
                     var component = components[index];
-                                        
+
                     if (component.Name === s) {
                         self.removeClass(highlightClass);
                         components.pop(component);
@@ -141,11 +140,11 @@ $(function () {
             $(".tab-header").show();
         });
     }
-    
+
     /*
      *
      * API data handling
-     * 
+     *
      **/
     function setDataSync() {
         syncData();
