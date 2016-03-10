@@ -1,7 +1,6 @@
-/* global $ */
 "use strict";
 
-$(function () {
+$(function() {
     var apiUrl = "http://prototypehold1.azurewebsites.net/api/ComponentLists/";
     var name = "stdList";
     var highlightClass = "success";
@@ -23,7 +22,7 @@ $(function () {
     function setNav() {
         $(".tab-header").hide();
 
-        $("#tabs li").click(function () {
+        $("#tabs li").click(function() {
             $(".tab-header").hide();
         });
     }
@@ -32,7 +31,7 @@ $(function () {
         $(".glyphicon-picture").tooltip({
             placement: "auto left",
             html: true,
-            title: function () {
+            title: function() {
                 var type = $(this).data("type");
                 return "<img src='" + type + ".jpg' height='150' width='150' />";
             }
@@ -42,7 +41,7 @@ $(function () {
     function setTables() {
         var dataTableOptions = {
             paging: false,
-            ordering: true,
+            ordering: false,
             info: false,
             columnDefs: [
                 { targets: -1, orderable: false }
@@ -59,10 +58,10 @@ $(function () {
         }
 
         function enableColumnFilter(table) {
-            table.columns().every(function () {
+            table.columns().every(function() {
                 var that = this;
                 $('input', that.header())
-                    .on('keyup change', function () {
+                    .on('keyup change', function() {
                         if (that.search() !== this.value) {
                             that
                                 .search(this.value)
@@ -74,7 +73,7 @@ $(function () {
     }
 
     function setList() {
-        $("tbody tr").click(function (e) {
+        $("tbody tr").click(function(e) {
             var self = $(this);
 
             var r = $(e.currentTarget).children();
@@ -134,7 +133,7 @@ $(function () {
     function setGlobalSearch() {
         var search = $("#search");
 
-        search.on("keyup change", function () {
+        search.on("keyup change", function() {
             $("#tabs li").removeClass("active");
             $(".tab-pane").addClass("active");
             $(".tab-header").show();
@@ -152,14 +151,14 @@ $(function () {
         setInterval(syncData, timeout);
 
         function syncData() {
-            getLatest(function () {
+            getLatest(function() {
                 setHightlighting();
             });
         }
     }
 
     function postList() {
-        deleteAll(function () {
+        deleteAll(function() {
             var dto = {
                 Name: name,
                 Components: components
@@ -176,7 +175,7 @@ $(function () {
     }
 
     function getLatest(callback) {
-        getAll(function (data) {
+        getAll(function(data) {
             components = [];
             if (data.length !== 0) {
                 var lastIndex = data.length - 1;
@@ -200,14 +199,14 @@ $(function () {
         $.ajax({
             url: apiUrl,
             type: 'GET',
-            success: function (data) {
+            success: function(data) {
                 callback(data);
             }
         });
     }
 
     function deleteAll(callback) {
-        getAll(function (data) {
+        getAll(function(data) {
             for (var index = 0; index < data.length; index++) {
                 var list = data[index];
                 deleteList(list.Id);
