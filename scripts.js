@@ -10,11 +10,17 @@ $(function() {
     init();
 
     function init() {
+        stopDatasheetPropagation();
         setTooltips();
         setTables();
         setGlobalSearch();
         setNav();
         setList();
+
+            getLatest(function() {
+                setHightlighting();
+                addButtons();
+            });
 
         setDataSync();
     }
@@ -35,6 +41,13 @@ $(function() {
                 var type = $(this).data("type");
                 return "<img src='" + type + ".jpg' height='150' width='150' />";
             }
+        });
+    }
+
+    function stopDatasheetPropagation()
+    {
+        $("a[href^='datasheet.pdf'").click(function(e) {
+            e.stopPropagation();
         });
     }
 
@@ -74,7 +87,9 @@ $(function() {
 
     function setList() {
         $("tbody tr").click(function(e) {
+            showSyncDiv();
             var self = $(this);
+
 
             var r = $(e.currentTarget).children();
 
@@ -97,7 +112,43 @@ $(function() {
             }
 
             postList();
+            invertSign(self);
         });
+    }
+
+    function showSyncDiv()
+    {
+        $(".sync").show();
+        setTimeout(function() {
+            $(".sync").hide();
+        }, 1500);
+    }
+
+    function addButtons()
+    {
+        var item = $("tbody tr");
+        console.log(item);
+        for (var i = 0; i < item.length; i++) {
+          var inner = $(item[i]).find("td p")
+          if(!$(item[i]).hasClass("success")){
+              $(inner).append('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
+          }
+          else {
+            $(inner).append('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
+          }
+        }
+    }
+
+    function invertSign(selector)
+    {
+        var ptag = $(selector).find("td p");
+        var spans = $(ptag).find("span");
+        if(!$(selector).hasClass("success")){
+            $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
+        }
+        else {
+          $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
+        }
     }
 
     function getDtoName(row) {
