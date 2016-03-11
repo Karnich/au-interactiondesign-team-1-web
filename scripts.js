@@ -16,12 +16,10 @@ $(function() {
         setGlobalSearch();
         setNav();
         setList();
-
-            getLatest(function() {
-                setHightlighting();
-                addButtons();
-            });
-
+        getLatest(function() {
+            setHightlighting();
+            addButtons();
+        });
         setDataSync();
     }
 
@@ -44,8 +42,7 @@ $(function() {
         });
     }
 
-    function stopDatasheetPropagation()
-    {
+    function stopDatasheetPropagation() {
         $("a[href^='datasheet.pdf'").click(function(e) {
             e.stopPropagation();
         });
@@ -90,7 +87,6 @@ $(function() {
             showSyncDiv();
             var self = $(this);
 
-
             var r = $(e.currentTarget).children();
 
             var s = getDtoName(r);
@@ -116,38 +112,32 @@ $(function() {
         });
     }
 
-    function showSyncDiv()
-    {
+    function showSyncDiv() {
         $(".sync").show();
         setTimeout(function() {
             $(".sync").hide();
-        }, 1500);
+        }, 600);
     }
 
-    function addButtons()
-    {
+    function addButtons() {
         var item = $("tbody tr");
-        console.log(item);
         for (var i = 0; i < item.length; i++) {
           var inner = $(item[i]).find("td p")
-          if(!$(item[i]).hasClass("success")){
-              $(inner).append('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
-          }
-          else {
-            $(inner).append('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
+          if(!$(item[i]).hasClass(highlightClass)){
+              inner.append('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
+          } else {
+              inner.append('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
           }
         }
     }
 
-    function invertSign(selector)
-    {
-        var ptag = $(selector).find("td p");
-        var spans = $(ptag).find("span");
-        if(!$(selector).hasClass("success")){
+    function invertSign(selector) {
+        var ptag = selector.find("td p");
+        var spans = ptag.find("span");
+        if(!selector.hasClass(highlightClass)){
             $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
-        }
-        else {
-          $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
+        } else {
+            $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
         }
     }
 
