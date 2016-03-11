@@ -25,7 +25,7 @@ p {
     margin: 0;
 }
 
-tr {
+.toggle-component {
     cursor: pointer;
 }
 
@@ -43,6 +43,7 @@ tr {
 
 .glyphicon-picture, .glyphicon-duplicate {
     color: #073d78;
+    cursor: pointer;
 }
 
 .sync {

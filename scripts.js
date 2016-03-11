@@ -83,9 +83,9 @@ $(function() {
     }
 
     function setList() {
-        $("tbody tr").click(function(e) {
+        $(document).on("click", ".toggle-component", function(e) {
             showSyncDiv();
-            var self = $(this);
+            var self = $(this).closest("tr");
 
             var r = $(e.currentTarget).children();
 
@@ -124,9 +124,9 @@ $(function() {
         for (var i = 0; i < item.length; i++) {
           var inner = $(item[i]).find("td p")
           if(!$(item[i]).hasClass(highlightClass)){
-              inner.append('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
+              inner.append('<span class="glyphicon glyphicon-large glyphicon-plus-sign toggle-component"></span>')
           } else {
-              inner.append('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
+              inner.append('<span class="glyphicon glyphicon-large glyphicon-minus-sign toggle-component"></span>')
           }
         }
     }
@@ -135,9 +135,9 @@ $(function() {
         var ptag = selector.find("td p");
         var spans = ptag.find("span");
         if(!selector.hasClass(highlightClass)){
-            $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-plus-sign"></span>')
+            $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-plus-sign toggle-component"></span>')
         } else {
-            $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-minus-sign"></span>')
+            $(spans[2]).replaceWith('<span class="glyphicon glyphicon-large glyphicon-minus-sign toggle-component"></span>')
         }
     }
 
